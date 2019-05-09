@@ -49,11 +49,26 @@ namespace Template
                     {
                         //shoot a ray from each pixel to each existing light source
                         var ray = new Ray(screen_position, light.position - screen_position);
-                        
+
+                        bool occluded = false;
+                        ////loop over all primitives that are in the world
+                        //foreach (Primitive P in Lijst van Primitives)
+                        //{
+                        //    if(p.Intersect(ray))
+                        //            occluded = true;
+
+                        //}
+                        //if(!occluded)
+                                //color += light.color * lightAttenuation(ray.t) //distance to light.
                     }
+
+                    //screen.Plot(x, y, ToRGB32(color))
                 }
 
             }
-		}
+
+            // lightAttenuation afzwakking van het licht. METHODE
+
+        }
 	}
 }
