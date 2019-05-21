@@ -53,6 +53,7 @@ namespace Template
 			GL.MatrixMode( MatrixMode.Projection );
 			GL.LoadIdentity();
 			GL.Ortho( -1.0, 1.0, -1.0, 1.0, 0.0, 4.0 );
+            app.screen = new Surface(Width, Height); 
 		}
 		protected override void OnUpdateFrame( FrameEventArgs e )
 		{

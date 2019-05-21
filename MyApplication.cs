@@ -12,7 +12,7 @@ namespace Template
 
         //List that stores all the light sources. 
         public List<Light> LightList;
-        Light light1, light2, light3;
+        Light light1, light2, light3, light4;
 
         //List that contains all the primitives
         public List<IPrimitive> PrimitiveList;
@@ -27,6 +27,7 @@ namespace Template
             light1 = new Light(new Vector2(200, 200), new Vector3(255, 255, 0), 1);
             light2 = new Light(new Vector2(300, 300), new Vector3(255, 0, 255), 5);
             light3 = new Light(new Vector2(250, 250), new Vector3(0, 255, 255), 7);
+            light4 = new Light(new Vector2(0, 0), new Vector3(200, 200, 200), 10); 
 
             //Create Primitives
             PrimitiveList = new List<IPrimitive>(); 
@@ -36,6 +37,7 @@ namespace Template
             LightList.Add(light1);
             LightList.Add(light2);
             LightList.Add(light3);
+            LightList.Add(light4);
 
             //Add
             PrimitiveList.Add(sphere1); 
