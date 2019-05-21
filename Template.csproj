@@ -51,6 +51,7 @@
     <Compile Include="MyApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ray.cs" />
+    <Compile Include="Sphere.cs" />
     <Compile Include="surface.cs" />
     <Compile Include="template.cs" />
   </ItemGroup>

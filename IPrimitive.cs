@@ -9,6 +9,5 @@ namespace INFOGR2019Tmpl8
     interface IPrimitive
     {
         bool Intersect(Ray ray);
-
     }
 }

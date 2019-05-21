@@ -8,17 +8,18 @@ using System.Threading.Tasks;
 namespace INFOGR2019Tmpl8
 {
     //Light class has a location (x,y) and a Vector3  which has the color values
-    //POSSIBILITY: ADD BRIGHTNESS.
     public class Light
     {
         public Vector2 position; 
-        public Vector3 color; 
+        public Vector3 color;
+        public float brightness; 
 
-        public Light(Vector2 _position, Vector3 _color)
+        public Light(Vector2 _position, Vector3 _color, float _brightness)
         {
 
             position = _position; 
-            color = _color; 
+            color = _color;
+            brightness = _brightness; 
 
         }
 
