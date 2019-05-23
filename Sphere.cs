@@ -24,7 +24,7 @@ namespace INFOGR2019Tmpl8
         {
             Vector2 c = this.postion - ray.origin;
             if (c.LengthSquared <= this.radius * this.radius)
-                return true; 
+                return true; //Intersection with a primitive
             float t = Vector2.Dot(c, ray.direction);
             Vector2 q = c - t * ray.direction;
             float p2 = Vector2.Dot(q, q);
