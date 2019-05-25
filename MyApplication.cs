@@ -8,8 +8,10 @@ namespace Template
 {
 	class MyApplication
 	{
-		//Member variables
-		public Surface screen;
+        //Member variables
+        public Surface screen; 
+        public float range = 1.0f;               //range and divison can be changed in the template.OnUpdateFrame() for zooming
+        public float division = 2.0f; 
 
         //List that stores all the light sources. 
         public List<Light> LightList;
@@ -25,17 +27,17 @@ namespace Template
 		{
             //Initialize the list which contains the Lights and the lights them self
             LightList = new List<Light>();
-            light1 = new Light(new Vector2(200, 200), new Vector3(255, 255, 0), 1);
-            light2 = new Light(new Vector2(300, 300), new Vector3(255, 0, 255), 5);
-            light3 = new Light(new Vector2(250, 250), new Vector3(0, 255, 255), 7);
-            light4 = new Light(new Vector2(0, 0), new Vector3(200, 200, 200), 10); 
-            light5 = new Light(new Vector2(450, 50), new Vector3(60,  150, 200), 1); 
+            light1 = new Light(new Vector2(-0.55f, -0.5f), new Vector3(255, 255, 0), 0.00005f);
+            light2 = new Light(new Vector2(-0.4f, -0.3f), new Vector3(255, 0, 255), 0.0001f);
+            light3 = new Light(new Vector2(0.3f, -0.5f), new Vector3(0, 255, 255), 0.00007f);
+            light4 = new Light(new Vector2(-0.8f, 0.8f), new Vector3(200, 200, 200), 0.0001f);
+            light5 = new Light(new Vector2(0.7f, 0.75f), new Vector3(60, 150, 200), 0.00001f);
 
             //Create Primitives
-            PrimitiveList = new List<IPrimitive>(); 
-            sphere1 = new Sphere(new Vector2(100, 100), 20, new Vector3(0,0,0));
-            sphere2 = new Sphere(new Vector2(250, 300), 20, new Vector3(0,0,0));
-            sphere3 = new Sphere(new Vector2(500, 100), 20, new Vector3(0,0,0));
+            PrimitiveList = new List<IPrimitive>();
+            sphere1 = new Sphere(new Vector2(-0.5f, 0.7f), 0.1f, new Vector3(0, 0, 0));
+            sphere2 = new Sphere(new Vector2(-0.2f, -0.2f), 0.1f, new Vector3(0, 0, 0));
+            sphere3 = new Sphere(new Vector2(0.8f, 0.6f), 0.5f, new Vector3(0, 0, 0));
 
             //Add all the lights to the list
             LightList.Add(light1);
@@ -45,10 +47,10 @@ namespace Template
             LightList.Add(light5);
 
             //Add all primitives to the list
-            PrimitiveList.Add(sphere1); 
-            PrimitiveList.Add(sphere2); 
-            PrimitiveList.Add(sphere3); 
-		}
+            PrimitiveList.Add(sphere1);
+            PrimitiveList.Add(sphere2);
+            PrimitiveList.Add(sphere3);
+        }
 
 		// tick: renders one frame
 		public void Tick()
@@ -60,14 +62,14 @@ namespace Template
            {
                Parallel.For(0, screen.width, (x) =>
                {
-                   var color = new Vector3();                          //Black to begin with
-                   Vector2 screen_position = new Vector2(x, y);        //position on the screen 
+                   var color = new Vector3();                                       //Black to begin with
+                   Vector2 ray_position = new Vector2(TransX(x), TransY(y));        //position on the screen 
 
                    //for each pixel loop over the light sources
                    foreach (Light light in LightList)
                    {
                        //shoot a ray from each pixel to each existing light source
-                       var ray = new Ray(screen_position, light.position - screen_position);
+                       var ray = new Ray(ray_position, light.position - ray_position);
 
                        bool occluded = false;
                        //loop over all primitives that are in the world
@@ -106,12 +108,15 @@ namespace Template
 
         float TransY(int y)
         {
-            return (y / (screen.height / 2) - 1) * -1;
+            //screen.width/screen.height => aspect ratio
+            //range = 1f, division = 2f
+            return ((y / (screen.height / division)) - range) * -1f / ((float)screen.width / screen.height);
         }
 
         float TransX(int x)
         {
-            return x / (screen.width / 2) - 1;
+            //range = 1f, division = 2f 
+            return x / (screen.width / division) - range; 
         }
     }
 }

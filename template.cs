@@ -60,6 +60,8 @@ namespace Template
 			// called once per frame; app logic
 			var keyboard = OpenTK.Input.Keyboard.GetState();
 			if( keyboard[OpenTK.Input.Key.Escape] ) terminated = true;
+            //Scroll controle -> Zoom function
+
 		}
 		protected override void OnRenderFrame( FrameEventArgs e )
 		{
