@@ -9,21 +9,23 @@ namespace Template
 	class MyApplication
 	{
         //Member variables
-        public Surface screen; 
+        public Surface screen;
+        //Variables used in TransX and TransY
         public float range = 1.0f;               //range and divison can be changed in the template.OnUpdateFrame() for zooming
         public float division = 2.0f; 
 
         //List that stores all the light sources. 
         public List<Light> LightList;
-        Light light1, light2, light3, light4, light5;
+        Light light1, light2, light3, light4, light5, light6;
 
         //List that contains all the primitives
         public List<IPrimitive> PrimitiveList;
-        Sphere sphere1, sphere2, sphere3; 
+        Sphere sphere1, sphere2, sphere3;
+        Line line1; 
 
 
-		// initialize
-		public void Init()
+        // initialize
+        public void Init()
 		{
             //Initialize the list which contains the Lights and the lights them self
             LightList = new List<Light>();
@@ -32,12 +34,14 @@ namespace Template
             light3 = new Light(new Vector2(0.3f, -0.5f), new Vector3(0, 255, 255), 0.00007f);
             light4 = new Light(new Vector2(-0.8f, 0.8f), new Vector3(200, 200, 200), 0.0001f);
             light5 = new Light(new Vector2(0.7f, 0.75f), new Vector3(60, 150, 200), 0.00001f);
+            light6 = new Light(new Vector2(1f, 0.6f), new Vector3(60, 140, 0), 0.0001f);
 
             //Create Primitives
             PrimitiveList = new List<IPrimitive>();
-            sphere1 = new Sphere(new Vector2(-0.5f, 0.7f), 0.1f, new Vector3(0, 0, 0));
+            sphere1 = new Sphere(new Vector2(0.5f, 0.7f), 0.3f, new Vector3(0, 0, 0));
             sphere2 = new Sphere(new Vector2(-0.2f, -0.2f), 0.1f, new Vector3(0, 0, 0));
-            sphere3 = new Sphere(new Vector2(0.8f, 0.6f), 0.5f, new Vector3(0, 0, 0));
+            sphere3 = new Sphere(new Vector2(0.5f, 0.5f), 0.15f, new Vector3(0, 0, 0));
+            line1 = new Line(new Vector2(-0.2f, 0.2f), new Vector2(0.2f, -0.2f)); 
 
             //Add all the lights to the list
             LightList.Add(light1);
@@ -45,11 +49,14 @@ namespace Template
             LightList.Add(light3);
             LightList.Add(light4);
             LightList.Add(light5);
+            LightList.Add(light6);
 
             //Add all primitives to the list
             PrimitiveList.Add(sphere1);
             PrimitiveList.Add(sphere2);
             PrimitiveList.Add(sphere3);
+            PrimitiveList.Add(line1);
+
         }
 
 		// tick: renders one frame
