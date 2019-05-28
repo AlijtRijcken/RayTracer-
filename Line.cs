@@ -10,47 +10,44 @@ namespace INFOGR2019Tmpl8
     class Line : IPrimitive
     {
         Vector2 start;
+        Vector2 direction;
         Vector2 end;
+        Vector3 color; 
         
-        public Line(Vector2 _start, Vector2 _end)
+        public Line(Vector2 _start, Vector2 _end, Vector3 _color)
         {
             start = _start;
-            end = _end; 
+            end = _end;
+            color = _color;
+            direction = Vector2.Normalize(end - start);
 
         }
 
         public bool Intersect(Ray ray)
-        {
-            Vector2 v1 = ray.origin - this.end;
-            Vector2 v2 = this.end - this.start;
-            Vector2 v3;
-
-            if (Cross(v2, ray.direction) == 0)
+        { 
+            if (Vector2.Dot(direction, ray.direction) == 1)
                 return false;   //Parallel, so no intersection
 
-            if (Cross(v2, ray.direction) > 0)
-                v3 = new Vector2(ray.direction.Y, -ray.direction.X);
+            Vector2 intersection = ray.Intersection(ray);
+
+            float m = (end.X - start.X) / (end.Y - start.Y);
+            float c = intersection.Y - intersection.X * m; 
+
+            if(pointIsOnLine(m,c, intersection.X, intersection.Y))
+                return true;
             else
-                v3 = new Vector2(-ray.direction.Y, ray.direction.X);
-
-            float t1 = Math.Abs(Cross(v2, v1)) / Vector2.Dot(v2, v3);
-            float t2 = Vector2.Dot(v1, v3) / Vector2.Dot(v2, v3);
-            float distance = ray.t;
-
-            if (t1 >= 0 && t2 >= 0 && t2 <= 1 && t1 < distance)
-            {
-                distance = 1;
-                return true;    //Intesction found
-            }
-            else
-                return false;   //No Intersection
-
+             return false;
 
         }
 
-        float Cross(Vector2 V1, Vector2 V2)
+        //Given the values of m and c for the equation of a line y = (m * x) + c, the task is to find whether the point (x, y) lies on the given line
+        bool pointIsOnLine(float m, float c, float x, float y)
         {
-            return V2.X * V1.Y - V2.Y * V1.X; 
+            // If (x, y) satisfies the equation of the line 
+            if (y == ((m * x) + c))
+                return true;
+
+            return false;
         }
     }
 }
