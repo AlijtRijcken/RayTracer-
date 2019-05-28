@@ -11,16 +11,16 @@ namespace Template
         //Member variables
         public Surface screen;
         //Variables used in TransX and TransY
-        public float range = 1.0f;               //range and divison could be changed in the template.OnUpdateFrame() for zooming
+        public float range = 1.0f; 
         public float division = 2.0f; 
 
         //List that stores all the light sources. 
         public List<Light> LightList;
-        Light light1, light2, light3, light4, light5, light6, light7;
+        Light light1, light2, light3, light4, light5, light6, light7, light8;
 
         //List that contains all the primitives
         public List<IPrimitive> PrimitiveList;
-        Sphere sphere1, sphere2, sphere3; 
+        Sphere sphere1, sphere2, sphere3, sphere4, sphere5; 
 
 
         // initialize
@@ -35,12 +35,16 @@ namespace Template
             light5 = new Light(new Vector2(0.7f, 0.75f), new Vector3(60, 150, 200), 0.00001f);
             light6 = new Light(new Vector2(1f, 0.6f), new Vector3(60, 140, 0), 0.0001f);
             light7 = new Light(new Vector2(0, 0), new Vector3(255, 255, 255), 0.00001f);
+            light8 = new Light(new Vector2(0, 0.6f), new Vector3(255, 0, 0), 0.0001f);
 
             //Create Primitives
             PrimitiveList = new List<IPrimitive>();
             sphere1 = new Sphere(new Vector2(0.5f, 0.7f), 0.1f, new Vector3(0, 0, 0));
             sphere2 = new Sphere(new Vector2(-0.2f, -0.2f), 0.1f, new Vector3(0, 0, 0));
             sphere3 = new Sphere(new Vector2(0.5f, 0.5f), 0.1f, new Vector3(0, 0, 0));
+            sphere4 = new Sphere(new Vector2(-0.7f, -0.1f), 0.07f, new Vector3(0, 0, 0));
+            sphere5 = new Sphere(new Vector2(0, 0.3f), 0.007f, new Vector3(0, 0, 0));
+
 
             //Add all the lights to the list
             LightList.Add(light1);
@@ -50,11 +54,15 @@ namespace Template
             LightList.Add(light5);
             LightList.Add(light6);
             LightList.Add(light7);
+            LightList.Add(light8);
 
             //Add all primitives to the list
             PrimitiveList.Add(sphere1);
             PrimitiveList.Add(sphere2);
             PrimitiveList.Add(sphere3);
+            PrimitiveList.Add(sphere4);
+            PrimitiveList.Add(sphere5);
+
 
         }
 
